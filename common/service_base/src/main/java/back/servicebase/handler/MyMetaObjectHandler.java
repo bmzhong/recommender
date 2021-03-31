@@ -10,7 +10,7 @@ import java.util.Date;
 public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
-//        this.setFieldValByName("gmtCreate", new Date(), metaObject);
+        this.setFieldValByName("registerTime", new Date(), metaObject);
         this.setFieldValByName("modifiedTime", new Date(), metaObject);
     }
 

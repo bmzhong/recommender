@@ -4,6 +4,7 @@ package back.login.controller;
 import back.common_utils.R;
 import back.login.entity.CustomerLogin;
 import back.login.service.CustomerLoginService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -31,13 +32,33 @@ public class CustomerLoginController {
     @PostMapping("addAccount")
     @ApiOperation(value = "新增账号")
     public R addAccount(
-            @ApiParam(name = "teacher", value = "讲师对象", required = true)
+            @ApiParam(name = "account", value = "账号", required = true)
             @RequestBody CustomerLogin customerLogin){
         boolean save=customerLoginService.save(customerLogin);
         if (save){
             return R.ok();
         }else {
             return R.error();
+        }
+    }
+
+    //实现登录功能
+    @PostMapping("login")
+    @ApiOperation(value = "登录功能")
+    public R login(@ApiParam(name = "account", value = "账号", required = true)
+                       @RequestBody CustomerLogin customerLogin){
+        //登录并返回id
+        QueryWrapper<CustomerLogin>wrapper=new QueryWrapper<>();
+        wrapper.eq("login_name",customerLogin.getLoginName());
+        wrapper.eq("password",customerLogin.getPassword());
+        customerLogin=customerLoginService.getOne(wrapper);
+
+        int id =customerLogin.getCustomerId();
+
+        if (id>=0){
+            return R.ok().data("id",id);
+        }else {
+            return R.error().data("id",-1);
         }
     }
 }
