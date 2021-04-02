@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * <p>
  *  前端控制器
@@ -55,7 +57,9 @@ public class CustomerLoginController {
 
         int id =customerLogin.getCustomerId();
 
+        ;
         if (id>=0){
+//            session.setAttribute("login_name",customerLogin.getLoginName());
             return R.ok().data("id",id);
         }else {
             return R.error().data("id",-1);
