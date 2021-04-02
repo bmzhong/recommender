@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/login/customer-register")
 @CrossOrigin
@@ -23,7 +25,7 @@ public class registerController {
     @ApiOperation(value = "账号注册")
     public R registerAccount
             (@ApiParam(name = "register", value = "注册账号", required = true)
-             @RequestBody RegisterVo registerVo){
+             @RequestBody RegisterVo registerVo, HttpServletRequest request){
         //注册账号返回账号id
         int id =registerService.registerAccount(registerVo);
 

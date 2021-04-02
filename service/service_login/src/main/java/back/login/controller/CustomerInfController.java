@@ -1,6 +1,7 @@
 package back.login.controller;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author testjava
  * @since 2021-03-31
  */
-
+@CrossOrigin
 @RestController
 @RequestMapping("/login/customer-inf")
 public class CustomerInfController {

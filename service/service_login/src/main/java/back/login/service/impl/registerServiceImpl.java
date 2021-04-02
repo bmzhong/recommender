@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Service
 public class registerServiceImpl implements registerService {
     @Autowired
@@ -24,19 +27,28 @@ public class registerServiceImpl implements registerService {
     public int registerAccount(RegisterVo registerVo) {
         //1、在customerlogin表中存储password、loginname
         CustomerLogin customerLogin=new CustomerLogin();
+
+        //检查用户名是否重复
+        QueryWrapper<CustomerLogin>wrapper=new QueryWrapper<>();
+        wrapper.eq("login_name",registerVo.getLoginName());
+        int id;
+        if (loginService.getOne(wrapper)!=null){
+            return id=0;
+        }
+
         //存储账号密码
         customerLogin.setLoginName(registerVo.getLoginName());
         customerLogin.setPassword(registerVo.getPassword());
         loginService.save(customerLogin);
 
         //获得账号id
-        QueryWrapper<CustomerLogin>wrapper=new QueryWrapper<>();
+
 
         wrapper.eq("login_name",customerLogin.getLoginName());
         wrapper.eq("password",customerLogin.getPassword());
 
         customerLogin=loginService.getOne(wrapper);
-        int id=customerLogin.getCustomerId();
+        id=customerLogin.getCustomerId();
 
 
         //2、在customerinfo表中存储phonenumber

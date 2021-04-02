@@ -58,11 +58,13 @@ public class CustomerLoginController {
         int id =customerLogin.getCustomerId();
 
         ;
-        if (id>=0){
+        if (id>0){
 //            session.setAttribute("login_name",customerLogin.getLoginName());
             return R.ok().data("id",id);
-        }else {
+        }else if (id<0){
             return R.error().data("id",-1);
+        }else {
+            return R.error().data("id",0);
         }
     }
 }
