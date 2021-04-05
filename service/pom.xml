@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>service_customer</module>
+        <module>service_login</module>
+        <module>service_seller</module>
     </modules>
     <dependencies>
 
@@ -146,6 +148,12 @@
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
             </resource>
         </resources>
         <plugins>
