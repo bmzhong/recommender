@@ -14,11 +14,15 @@
         <module name="service_login" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="service_admin" target="8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common_utils" options="-parameters" />
       <module name="service" options="-parameters" />
+      <module name="service_admin" options="-parameters" />
       <module name="service_base" options="-parameters" />
       <module name="service_customer" options="-parameters" />
       <module name="service_login" options="-parameters" />

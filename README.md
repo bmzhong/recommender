@@ -16,6 +16,8 @@
 
 5.版本控制：码云
 
+6.软件架构风格：REST
+
 
 #### 项目目录分析
 
@@ -26,7 +28,8 @@
 
 1.  项目下载到本地后直接用idea加载，勿更改父项目pom.xml文件中的依赖版本控制，无法下载的依赖从我提供的库中下载
 2.  下载到本地后记得更改三个service模块中的本地数据库配置信息
-3.  项目使用swagger测试接口，相关配置已在common中配置完成
+3.  项目使用swagger测试接口，相关配置已在common中配置完成，地址http://localhost:port/swagger-ui.html
+4.  使用/src/test/java/CodeGenerator自动生成代码，注意修改文件中的数据库名
 #### 参与贡献
 
 1.  Fork 本仓库
@@ -35,11 +38,4 @@
 4.  新建 Pull Request
 
 
-#### 特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
