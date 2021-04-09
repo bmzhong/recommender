@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *   用户地址类
  * </p>
  *
  * @author plyn
@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="CustomerAddr对象", description="")
+@ApiModel(value="CustomerAddr对象", description="用户收货地址")
 public class CustomerAddr implements Serializable {
 
     private static final long serialVersionUID = 1L;
