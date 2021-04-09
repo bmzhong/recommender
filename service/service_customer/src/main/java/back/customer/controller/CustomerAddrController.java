@@ -45,9 +45,10 @@ public class CustomerAddrController {
     }
 
     //新增地址
-    @ApiOperation(value = "新增地址")
+    @ApiOperation(value = "新增地址，新增地址拒绝自动添加为默认地址")
     @PostMapping("addAddr")
     public R addAddr(@RequestBody CustomerAddr customerAddr) {
+        customerAddr.setIsDefault(0); //新增地址不允许自动添加为默认地址
         boolean save = addrService.save(customerAddr);
         if (save)
             return R.ok();
