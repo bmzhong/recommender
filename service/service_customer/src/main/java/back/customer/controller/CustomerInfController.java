@@ -54,7 +54,7 @@ public class CustomerInfController {
     public R editCustomer(@RequestBody CustomerInf customerInf) {
         boolean result = customerInfService.updateById(customerInf);
         if(result){
-            return R.ok().data("id", customerInf.getCustomerId());
+            return R.ok().data("id", customerInf.getCustomerInfId());
         }
         return R.error();
     }
