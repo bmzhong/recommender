@@ -1,9 +1,12 @@
 package back.seller.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import back.common_utils.R;
+import back.seller.entity.ProductInfo;
+import back.seller.service.ProductInfoService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -17,5 +20,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/seller/product-info")
 public class ProductInfoController {
 
+    @Autowired
+    ProductInfoService productInfoService;
+
+    /**
+     * @author :张琦
+     * @param productInfo 传入的商品信息封装的对象
+     * @return 返回增加操作成功与否
+     */
+    @ApiOperation(value = "增加商品信息")
+    @PostMapping("/add/product")
+    public R addProduct(@RequestBody ProductInfo productInfo) {
+        productInfo.setProductId(0);
+        final boolean save = productInfoService.save(productInfo);
+        if (save) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
+    /**
+     * @author :张琦
+     * @param id 要修改商品的id
+     * @param productInfo 要修改商品的属性
+     * @return 返回修改成功与否
+     */
+    @ApiOperation("编辑商品信息")
+    @PostMapping("/edit/product/{id}")
+    public R editProduct (@PathVariable("id") Integer id,
+                          @RequestBody ProductInfo productInfo) {
+        productInfo.setProductId(id);
+        final boolean updateById = productInfoService.updateById(productInfo);  //通过id来修改商品的信息
+        if (updateById) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
 }
 
