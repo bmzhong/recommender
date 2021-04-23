@@ -19,13 +19,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class CustomerConfig {
     /**
-     *
      * 逻辑删除插件
      */
     @Bean
-    public ISqlInjector sqlInjector(){
+    public ISqlInjector sqlInjector() {
         return new LogicSqlInjector();
     }
+
     /**
      * 分页插件
      */

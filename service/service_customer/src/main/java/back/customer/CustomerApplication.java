@@ -8,6 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"back"})
 public class CustomerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(CustomerApplication.class,args);
+        SpringApplication.run(CustomerApplication.class, args);
     }
 }

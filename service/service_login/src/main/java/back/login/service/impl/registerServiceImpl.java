@@ -2,9 +2,12 @@ package back.login.service.impl;
 
 import back.login.entity.CustomerInf;
 import back.login.entity.CustomerLogin;
+import back.login.entity.SellerLogin;
+import back.login.entity.Vo.RegisterSellerVo;
 import back.login.entity.Vo.RegisterVo;
 import back.login.service.CustomerInfService;
 import back.login.service.CustomerLoginService;
+import back.login.service.SellerLoginService;
 import back.login.service.registerService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class registerServiceImpl implements registerService {
 
     @Autowired
     CustomerInfService infService;
+
+    @Autowired
+    SellerLoginService sellerLoginService;
 
 
 
@@ -57,6 +63,38 @@ public class registerServiceImpl implements registerService {
         customerInf.setMobilePhone(registerVo.getMobilePhone());
         customerInf.setCustomerId(customerLogin.getCustomerId());
         infService.save(customerInf);
+
+        return id;
+    }
+
+    @Override
+    public int registerSeller(RegisterSellerVo registerSellerVo) {
+        //1、在sellerlogin表中存储password、loginname
+        SellerLogin sellerLogin=new SellerLogin();
+
+        //检查用户名是否重复
+        QueryWrapper<SellerLogin>wrapper=new QueryWrapper<>();
+        wrapper.eq("login_name",registerSellerVo.getLoginName());
+        int id;
+        if (sellerLoginService.getOne(wrapper)!=null){
+            return id=0;
+        }
+        //存储信息
+        sellerLogin.setLoginName(registerSellerVo.getLoginName());
+        sellerLogin.setPassword(registerSellerVo.getPassword());
+        sellerLogin.setSellerTrueName(registerSellerVo.getTrueName());
+        sellerLogin.setSellerEmail(registerSellerVo.getEmail());
+        sellerLogin.setMobilePhone(registerSellerVo.getMobilePhone());
+        sellerLoginService.save(sellerLogin);
+
+        //获得账号id
+
+
+        wrapper.eq("login_name",sellerLogin.getLoginName());
+        wrapper.eq("password",sellerLogin.getPassword());
+
+        sellerLogin=sellerLoginService.getOne(wrapper);
+        id=sellerLogin.getSellerId();
 
         return id;
     }

@@ -1,6 +1,6 @@
 package back.customer.mapper;
 
-import back.customer.entity.CustomerInf;
+import back.customer.entity.ProductInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author plyn
- * @since 2021-04-08
+ * @since 2021-04-22
  */
-public interface CustomerInfMapper extends BaseMapper<CustomerInf> {
+public interface ProductInfoMapper extends BaseMapper<ProductInfo> {
 
 }
