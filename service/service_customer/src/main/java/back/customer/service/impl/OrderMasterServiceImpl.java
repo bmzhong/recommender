@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author plyn
@@ -36,7 +36,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
         //获取商品详情
         ProductInfo product = productInfoService.getById(order.getProductId());
-        if (product==null)
+        if (product == null)
             return false;
 
         //完善orderMaster信息

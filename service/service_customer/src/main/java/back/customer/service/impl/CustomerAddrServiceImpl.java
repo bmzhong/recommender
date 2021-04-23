@@ -18,8 +18,8 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
- *  用户地址管理
+ * 服务实现类
+ * 用户地址管理
  * </p>
  *
  * @author plyn
@@ -39,13 +39,13 @@ CustomerAddrServiceImpl extends ServiceImpl<CustomerAddrMapper, CustomerAddr> im
 
         //获取该用户的默认地址项
         QueryWrapper<CustomerAddr> wrapper = new QueryWrapper<>();
-        Map<String,Object> params = new HashMap<>();
-        params.put("customer_id",customerId);
-        params.put("is_default",1);
+        Map<String, Object> params = new HashMap<>();
+        params.put("customer_id", customerId);
+        params.put("is_default", 1);
         wrapper.allEq(params);
         CustomerAddr defaultOne = getOne(wrapper);
 
-        if (defaultOne!=null) { //该用户设置了默认地址，取消原默认
+        if (defaultOne != null) { //该用户设置了默认地址，取消原默认
             defaultOne.setIsDefault(0);
             updateById(defaultOne);
         }

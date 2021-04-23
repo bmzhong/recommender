@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Order对象", description="vo对象，传递订单信息")
+@ApiModel(value = "Order对象", description = "vo对象，传递订单信息")
 public class Order {
 
     @ApiModelProperty(value = "订单编号 yyyymmddnnnnnnnn")

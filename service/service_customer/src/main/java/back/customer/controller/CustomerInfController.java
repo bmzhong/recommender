@@ -4,7 +4,6 @@ package back.customer.controller;
 import back.common_utils.R;
 import back.customer.entity.CustomerInf;
 import back.customer.service.CustomerInfService;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author plyn
@@ -38,8 +37,8 @@ public class CustomerInfController {
     public R findCustomer(@ApiParam(name = "id", value = "客户id", required = true)
                           @PathVariable Integer id) {
         CustomerInf customerInf = customerInfService.getById(id);
-        if (customerInf==null)
-            return R.error().data("msg","no data found");
+        if (customerInf == null)
+            return R.error().data("msg", "no data found");
         else
             return R.ok().data("customerInf", customerInf);
     }
@@ -56,7 +55,7 @@ public class CustomerInfController {
     @PostMapping("/edit/customer/others")
     public R editCustomer(@RequestBody CustomerInf customerInf) {
         boolean result = customerInfService.updateById(customerInf);
-        if(result){
+        if (result) {
             return R.ok().data("id", customerInf.getCustomerId());
         }
         return R.error();

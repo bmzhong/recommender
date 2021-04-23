@@ -2,7 +2,6 @@ package back.customer.controller;
 
 
 import back.common_utils.R;
-import back.customer.entity.OrderDetail;
 import back.customer.entity.OrderMaster;
 import back.customer.entity.vo.Order;
 import back.customer.service.OrderMasterService;
@@ -39,7 +38,7 @@ public class OrderMasterController {
         wrapper.eq("customer_id", id);
         List<OrderMaster> list = orderMasterService.list(wrapper);
         if (list.isEmpty())
-            return R.error().data("msg","no data found");
+            return R.error().data("msg", "no data found");
         else
             return R.ok().data("list", list);
     }
@@ -51,10 +50,10 @@ public class OrderMasterController {
         QueryWrapper<OrderMaster> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("order_sn", orderSn);
         OrderMaster orderMaster = orderMasterService.getOne(queryWrapper);
-        if (orderMaster==null)
-            return R.error().data("msg","no data found");
+        if (orderMaster == null)
+            return R.error().data("msg", "no data found");
         else
-            return R.ok().data("orderMaster",orderMaster);
+            return R.ok().data("orderMaster", orderMaster);
     }
 
     @ApiOperation(value = "添加订单")

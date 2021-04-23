@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author plyn
@@ -31,15 +31,15 @@ public class OrderDetailController {
     //查询选中订单的详情信息
     @ApiOperation(value = "查询选中订单的详情信息")
     @PostMapping("findOrderDetailById/{orderId}")
-    public R findOrderDetailById(@ApiParam(name = "orderId",value = "订单ID", required = true)
+    public R findOrderDetailById(@ApiParam(name = "orderId", value = "订单ID", required = true)
                                  @PathVariable Integer orderId) {
         QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("order_id",orderId);
+        queryWrapper.eq("order_id", orderId);
         OrderDetail orderDetail = orderDetailService.getOne(queryWrapper);
-        if (orderDetail==null)
-            return R.error().data("msg","no data found");
+        if (orderDetail == null)
+            return R.error().data("msg", "no data found");
         else
-            return R.ok().data("orderDetail",orderDetail);
+            return R.ok().data("orderDetail", orderDetail);
     }
 
     //通过商品名称模糊查询订单
@@ -48,10 +48,10 @@ public class OrderDetailController {
     public R findOrderByProductName(@ApiParam(name = "productName", value = "商品关键字", required = true)
                                     @PathVariable String productName) {
         QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("product_name",productName);
+        queryWrapper.like("product_name", productName);
         List<Object> list = orderDetailService.listObjs(queryWrapper);
         if (list.isEmpty())
-            return R.error().data("msg","no data found");
+            return R.error().data("msg", "no data found");
         else
             return R.ok().data("list", list);
     }
