@@ -46,7 +46,7 @@ public class OrderMasterController {
     @ApiOperation(value = "通过订单号查询订单")
     @GetMapping("findOrderById/{orderSn}")
     public R findOrderById(@ApiParam(name = "orderSn", value = "订单编号", required = true)
-                           @PathVariable Long orderSn) {
+                           @PathVariable String orderSn) {
         QueryWrapper<OrderMaster> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("order_sn", orderSn);
         OrderMaster orderMaster = orderMasterService.getOne(queryWrapper);

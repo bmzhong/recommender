@@ -34,8 +34,9 @@ public class OrderMaster implements Serializable {
     @TableId(value = "order_id", type = IdType.AUTO)
     private Integer orderId;
 
-    @ApiModelProperty(value = "订单编号 yyyymmddnnnnnnnn")
-    private Long orderSn;
+    @ApiModelProperty(value = "订单编号")
+    @TableField(fill = FieldFill.INSERT)
+    private String orderSn;
 
     @ApiModelProperty(value = "用户ID")
     private Integer customerId;
@@ -59,7 +60,7 @@ public class OrderMaster implements Serializable {
     @ApiModelProperty(value = "收货时间")
     private Date receiveTime;
 
-    @ApiModelProperty(value = "订单状态")
+    @ApiModelProperty(value = "订单状态，用户未确认0，用户已确认但商家未发货1，用户已确认商家已发货2，订单已完成3")
     private Integer orderStatus;
 
     @ApiModelProperty(value = "订单积分")

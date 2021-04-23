@@ -40,7 +40,6 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
             return false;
 
         //完善orderMaster信息
-        orderMaster.setOrderSn(order.getOrderSn());
         orderMaster.setCustomerId(order.getCustomerId());
         orderMaster.setCustomerAddrId(order.getCustomerAddrId());
         orderMaster.setOrderMoney(order.getOrderMoney());

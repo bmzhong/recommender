@@ -6,6 +6,8 @@
 
 package back.customer.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,9 +21,6 @@ import java.math.BigDecimal;
 @Accessors(chain = true)
 @ApiModel(value = "Order对象", description = "vo对象，传递订单信息")
 public class Order {
-
-    @ApiModelProperty(value = "订单编号 yyyymmddnnnnnnnn")
-    private Long orderSn;
 
     @ApiModelProperty(value = "用户ID")
     private Integer customerId;
