@@ -41,7 +41,10 @@ public class CustomerAddrController {
         QueryWrapper<CustomerAddr> wrapper = new QueryWrapper<>();
         wrapper.eq("customer_id",id);
         List<CustomerAddr> list = addrService.list(wrapper);
-        return R.ok().data("list", list);
+        if (list.isEmpty())
+            return R.error().data("msg","no data found");
+        else
+            return R.ok().data("list", list);
     }
 
     //新增地址

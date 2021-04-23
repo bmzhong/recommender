@@ -2,7 +2,9 @@ package back.customer.controller;
 
 
 import back.common_utils.R;
+import back.customer.entity.OrderDetail;
 import back.customer.entity.OrderMaster;
+import back.customer.entity.vo.Order;
 import back.customer.service.OrderMasterService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
@@ -36,27 +38,34 @@ public class OrderMasterController {
         QueryWrapper<OrderMaster> wrapper = new QueryWrapper<>();
         wrapper.eq("customer_id", id);
         List<OrderMaster> list = orderMasterService.list(wrapper);
-        return R.ok().data("list", list);
+        if (list.isEmpty())
+            return R.error().data("msg","no data found");
+        else
+            return R.ok().data("list", list);
     }
 
     @ApiOperation(value = "通过订单号查询订单")
-    @GetMapping("findOrderById/{orderId")
-    public R findOrderById(@ApiParam(name = "orderId", value = "订单号", required = true)
-                           @PathVariable Integer orderId) {
-        OrderMaster orderMaster = orderMasterService.getById(orderId);
-        return R.ok().data("orderMaster",orderMaster);
+    @GetMapping("findOrderById/{orderSn}")
+    public R findOrderById(@ApiParam(name = "orderSn", value = "订单编号", required = true)
+                           @PathVariable Long orderSn) {
+        QueryWrapper<OrderMaster> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_sn", orderSn);
+        OrderMaster orderMaster = orderMasterService.getOne(queryWrapper);
+        if (orderMaster==null)
+            return R.error().data("msg","no data found");
+        else
+            return R.ok().data("orderMaster",orderMaster);
     }
 
     @ApiOperation(value = "添加订单")
-    @PostMapping("addOrder/{customerId}/{productId}/{count}")
-    public R addOrder(@ApiParam(name = "customerId", value = "用户Id", required = true)
-                      @PathVariable Integer customerId,
-                      @ApiParam(name = "productId", value = "商品Id", required = true)
-                      @PathVariable Integer productId,
-                      @ApiParam(name = "count", value = "商品数量", required = true)
-                      @PathVariable Integer count) {
-
-        return R.ok();
+    @PostMapping("addOrder")
+    public R addOrder(@ApiParam(value = "订单信息", required = true)
+                      @RequestBody Order order) {
+        boolean add = orderMasterService.addOrder(order);
+        if (add)
+            return R.ok();
+        else
+            return R.error();
     }
 
 }

@@ -38,7 +38,10 @@ public class CustomerInfController {
     public R findCustomer(@ApiParam(name = "id", value = "客户id", required = true)
                           @PathVariable Integer id) {
         CustomerInf customerInf = customerInfService.getById(id);
-        return R.ok().data("customerInf", customerInf);
+        if (customerInf==null)
+            return R.error().data("msg","no data found");
+        else
+            return R.ok().data("customerInf", customerInf);
     }
 
     /*

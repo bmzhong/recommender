@@ -33,8 +33,13 @@ public class OrderDetailController {
     @PostMapping("findOrderDetailById/{orderId}")
     public R findOrderDetailById(@ApiParam(name = "orderId",value = "订单ID", required = true)
                                  @PathVariable Integer orderId) {
-        OrderDetail orderDetail = orderDetailService.getById(orderId);
-        return R.ok().data("orderDetail",orderDetail);
+        QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_id",orderId);
+        OrderDetail orderDetail = orderDetailService.getOne(queryWrapper);
+        if (orderDetail==null)
+            return R.error().data("msg","no data found");
+        else
+            return R.ok().data("orderDetail",orderDetail);
     }
 
     //通过商品名称模糊查询订单
@@ -45,7 +50,10 @@ public class OrderDetailController {
         QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("product_name",productName);
         List<Object> list = orderDetailService.listObjs(queryWrapper);
-        return R.ok().data("list",list);
+        if (list.isEmpty())
+            return R.error().data("msg","no data found");
+        else
+            return R.ok().data("list", list);
     }
 
 }

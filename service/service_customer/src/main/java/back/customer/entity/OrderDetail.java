@@ -46,5 +46,7 @@ public class OrderDetail implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date modifiedTime;
 
+    @ApiModelProperty(value = "商品名称")
+    private String productName;
 
 }

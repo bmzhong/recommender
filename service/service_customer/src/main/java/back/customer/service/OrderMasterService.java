@@ -1,6 +1,7 @@
 package back.customer.service;
 
 import back.customer.entity.OrderMaster;
+import back.customer.entity.vo.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrderMasterService extends IService<OrderMaster> {
     //添加订单
-    boolean addOrder(Integer customer_id, Integer product_id, Integer count);
+    boolean addOrder(Order order);
 }
