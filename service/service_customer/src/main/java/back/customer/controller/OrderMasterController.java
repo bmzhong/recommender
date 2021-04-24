@@ -32,7 +32,7 @@ public class OrderMasterController {
     //查询所有订单
     @ApiOperation(value = "查询该用户所有订单")
     @PostMapping("findAllOrderMaster/{id}")
-    public R findAllAddr(@ApiParam(name = "id", value = "用户id", required = true)
+    public R findAllOrderMaster(@ApiParam(name = "id", value = "用户id", required = true)
                          @PathVariable Integer id) {
         QueryWrapper<OrderMaster> wrapper = new QueryWrapper<>();
         wrapper.eq("customer_id", id);
