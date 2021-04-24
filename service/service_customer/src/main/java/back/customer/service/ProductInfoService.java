@@ -1,6 +1,6 @@
 package back.customer.service;
 
-import back.customer.entity.CustomerInf;
+import back.customer.entity.ProductInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author plyn
- * @since 2021-04-08
+ * @since 2021-04-22
  */
-public interface CustomerInfService extends IService<CustomerInf> {
+public interface ProductInfoService extends IService<ProductInfo> {
 
 }

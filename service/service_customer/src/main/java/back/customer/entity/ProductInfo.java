@@ -1,32 +1,29 @@
-package back.seller.entity;
+package back.customer.entity;
 
-import java.math.BigDecimal;
-
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author testjava
- * @since 2021-04-08
+ * @author plyn
+ * @since 2021-04-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ProductInfo对象", description="")
+@ApiModel(value = "ProductInfo对象", description = "")
 public class ProductInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,7 +63,6 @@ public class ProductInfo implements Serializable {
     private String descript;
 
     @ApiModelProperty(value = "商品录入时间")
-    @TableField(fill = FieldFill.INSERT)
     private Date indate;
 
     @ApiModelProperty(value = "修改时间")

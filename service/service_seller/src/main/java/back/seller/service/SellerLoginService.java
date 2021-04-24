@@ -12,5 +12,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-04-23
  */
 public interface SellerLoginService extends IService<SellerLogin> {
-
 }

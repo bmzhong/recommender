@@ -57,7 +57,7 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("seller","product_info");//加入数据库名
+        strategy.setInclude("seller_login");//加入数据库名
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         //strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 

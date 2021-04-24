@@ -7,9 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="service_seller" />
         <module name="common_utils" />
         <module name="service_customer" />
-        <module name="service_seller" />
         <module name="service_base" />
         <module name="service_login" />
       </profile>

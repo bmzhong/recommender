@@ -25,7 +25,6 @@ import java.util.List;
  * @since 2021-04-08
  */
 @RestController
-@RequestMapping("/data")
 @Api("Product Info Controller")
 @CrossOrigin
 public class ProductInfoController {
@@ -46,7 +45,7 @@ public class ProductInfoController {
     ProductCategoryService productCategoryService;
 
     @ApiOperation("根据id查询商品信息")
-    @GetMapping("/product/{id}")
+    @GetMapping("/data/product/{id}")
     R getProductInfoById(@ApiParam(name = "id", value = "商品的id", required = true)
                          @PathVariable Integer id) {
         ProductInfo product = productInfoService.getById(id);
@@ -81,7 +80,7 @@ public class ProductInfoController {
 
 
     @ApiOperation("查询所有分类")
-    @GetMapping("/brand")
+    @GetMapping("/data/category")
     R getAllCategory() {
         List<ProductCategory> productCategory = productCategoryService.list(null);
         if (productCategory.size() <= 0) {
@@ -101,7 +100,7 @@ public class ProductInfoController {
     }
 
     @ApiOperation("获取所有品牌信息")
-    @GetMapping("/brand")
+    @GetMapping("/data/brand")
     R getAllBrands() {
         List<BrandInfo> brandInfos = brandInfoService.list(null);
         if (brandInfos.size() <= 0) {
@@ -117,9 +116,44 @@ public class ProductInfoController {
                 brandInfoVo.setDesc(brandInfo.getBrandDesc());
                 brandInfoVos.add(brandInfoVo);
             }
-            return R.ok().data("brand",brandInfoVos);
+            return R.ok().data("brand", brandInfoVos);
         }
+    }
 
+    /**
+     * @param productInfo 传入的商品信息封装的对象
+     * @return 返回增加操作成功与否
+     * @author :张琦
+     */
+    @ApiOperation(value = "增加商品信息")
+    @PostMapping("/add/product")
+    public R addProduct(@ApiParam(value = "商品信息", required = true)
+                        @RequestBody ProductInfo productInfo) {
+        productInfo.setProductId(0);
+        final boolean save = productInfoService.save(productInfo);
+        if (save) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
+    /**
+     * @param id          要修改商品的id
+     * @param productInfo 要修改商品的属性
+     * @return 返回修改成功与否
+     * @author :张琦
+     */
+    @ApiOperation("编辑商品信息")
+    @PostMapping("/edit/product")
+    public R editProduct(@ApiParam(value = "商品信息", required = true)
+                         @RequestBody ProductInfo productInfo) {
+        final boolean updateById = productInfoService.updateById(productInfo);  //通过id来修改商品的信息
+        if (updateById) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
     }
 }
 
