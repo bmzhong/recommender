@@ -49,7 +49,7 @@ public class CustomerAddrController {
         customerAddr.setIsDefault(0); //新增地址不允许自动添加为默认地址
         boolean save = addrService.save(customerAddr);
         if (save)
-            return R.ok();
+            return R.ok().data("addrId",customerAddr.getCustomerAddrId());
         else
             return R.error();
     }
