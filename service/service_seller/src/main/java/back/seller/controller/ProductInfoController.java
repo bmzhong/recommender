@@ -139,7 +139,6 @@ public class ProductInfoController {
     }
 
     /**
-     * @param id          要修改商品的id
      * @param productInfo 要修改商品的属性
      * @return 返回修改成功与否
      * @author :张琦
