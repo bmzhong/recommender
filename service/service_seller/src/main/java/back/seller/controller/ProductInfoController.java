@@ -155,5 +155,24 @@ public class ProductInfoController {
             return R.error();
         }
     }
+
+    /**
+     *
+     * @param id 被查询的商家的id
+     * @return 返回所有的商品信息
+     * @author :张琦
+     */
+    @ApiOperation(value = "查询该商家所有商品信息")
+    @PostMapping("findAllProductInfo/{id}")
+    public R findAllProductInfo(@ApiParam(name = "id", value = "商家id", required = true)
+                                @PathVariable Integer id) {
+        QueryWrapper<ProductInfo> wrapper = new QueryWrapper<>();
+        wrapper.eq("seller_id", id);
+        List<ProductInfo> list = productInfoService.list(wrapper);
+        if (list.isEmpty())
+            return R.error().data("msg", "no data found");
+        else
+            return R.ok().data("list", list);
+    }
 }
 
