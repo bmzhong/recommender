@@ -1,6 +1,9 @@
 package back.seller.controller;
 
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RestController;
 import back.common_utils.R;
 import back.seller.entity.SellerLogin;
 import back.seller.service.SellerLoginService;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author testjava
@@ -25,7 +28,6 @@ public class SellerLoginController {
     SellerLoginService sellerService;
 
     /**
-     *
      * @param id 卖家id
      * @return 返回查询到的卖家信息
      */
@@ -38,18 +40,17 @@ public class SellerLoginController {
     }
 
     /**
-     *
      * @param seller 要修改的卖家信息，包括用户名，手机号，邮箱等
-     * @return  返回是否修改成功
+     * @return 返回是否修改成功
      */
     @ApiOperation(value = "修改商家信息")
     @PostMapping("/updateInfo")
     public R updateInfo(@ApiParam(name = "sellerInfo", value = "卖家信息", required = true)
-                           @RequestBody SellerLogin seller) {
+                        @RequestBody SellerLogin seller) {
         boolean res = sellerService.updateById(seller);
-        if(res){
+        if (res) {
             return R.ok();
-        }else{
+        } else {
             return R.error();
         }
     }

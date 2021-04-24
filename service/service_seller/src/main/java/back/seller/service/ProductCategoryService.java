@@ -1,6 +1,6 @@
 package back.seller.service;
 
-import back.seller.entity.SellerLogin;
+import back.seller.entity.ProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,7 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author testjava
- * @since 2021-04-23
+ * @since 2021-04-24
  */
-public interface SellerLoginService extends IService<SellerLogin> {
+public interface ProductCategoryService extends IService<ProductCategory> {
+
 }
