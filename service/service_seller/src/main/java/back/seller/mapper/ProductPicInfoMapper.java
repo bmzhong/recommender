@@ -1,6 +1,6 @@
 package back.seller.mapper;
 
-import back.seller.entity.Seller;
+import back.seller.entity.ProductPicInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author testjava
- * @since 2021-04-08
+ * @since 2021-04-23
  */
-public interface SellerMapper extends BaseMapper<Seller> {
+public interface ProductPicInfoMapper extends BaseMapper<ProductPicInfo> {
 
 }

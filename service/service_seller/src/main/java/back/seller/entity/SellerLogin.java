@@ -16,19 +16,22 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author testjava
- * @since 2021-04-08
+ * @since 2021-04-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Seller对象", description="")
-public class Seller implements Serializable {
+@ApiModel(value="SellerLogin对象", description="")
+public class SellerLogin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "商家ID")
     @TableId(value = "seller_id", type = IdType.AUTO)
     private Integer sellerId;
+
+    @ApiModelProperty(value = "登录名")
+    private String loginName;
 
     @ApiModelProperty(value = "商家名称")
     private String sellerName;
@@ -40,7 +43,7 @@ public class Seller implements Serializable {
     private String sellerTrueName;
 
     @ApiModelProperty(value = "手机号")
-    private Integer mobilePhone;
+    private String mobilePhone;
 
     @ApiModelProperty(value = "邮箱")
     private String sellerEmail;

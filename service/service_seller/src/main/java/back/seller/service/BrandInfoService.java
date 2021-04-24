@@ -1,6 +1,6 @@
 package back.seller.service;
 
-import back.seller.entity.Seller;
+import back.seller.entity.BrandInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author testjava
- * @since 2021-04-08
+ * @since 2021-04-23
  */
-public interface SellerService extends IService<Seller> {
+public interface BrandInfoService extends IService<BrandInfo> {
 
 }
