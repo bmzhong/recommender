@@ -1,8 +1,12 @@
 package back.seller.entity;
 
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -62,6 +66,7 @@ public class ProductInfo implements Serializable {
     private String descript;
 
     @ApiModelProperty(value = "商品录入时间")
+    @TableField(fill = FieldFill.INSERT)
     private Date indate;
 
     @ApiModelProperty(value = "修改时间")
