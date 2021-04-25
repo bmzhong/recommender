@@ -3,8 +3,8 @@ package back.seller.controller;
 
 import back.common_utils.R;
 import back.seller.entity.*;
-import back.seller.entity.Vo.BrandInfoVo;
-import back.seller.entity.Vo.ProductCategoryVo;
+import back.seller.entity.vo.BrandInfoVo;
+import back.seller.entity.vo.ProductCategoryVo;
 import back.seller.service.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
@@ -30,23 +30,23 @@ import java.util.List;
 public class ProductInfoController {
 
     @Autowired
-    ProductInfoService productInfoService;
+    private ProductInfoService productInfoService;
 
     @Autowired
-    ProductPicInfoService productPicInfoService;
+    private ProductPicInfoService productPicInfoService;
 
     @Autowired
-    BrandInfoService brandInfoService;
+    private BrandInfoService brandInfoService;
 
     @Autowired
-    SellerLoginService sellerLoginService;
+    private SellerLoginService sellerLoginService;
 
     @Autowired
-    ProductCategoryService productCategoryService;
+    private ProductCategoryService productCategoryService;
 
     @ApiOperation("根据id查询商品信息")
     @GetMapping("/data/product/{id}")
-    R getProductInfoById(@ApiParam(name = "id", value = "商品的id", required = true)
+    public R getProductInfoById(@ApiParam(name = "id", value = "商品的id", required = true)
                          @PathVariable Integer id) {
         ProductInfo product = productInfoService.getById(id);
         if (null == product) {
@@ -81,7 +81,7 @@ public class ProductInfoController {
 
     @ApiOperation("查询所有分类")
     @GetMapping("/data/category")
-    R getAllCategory() {
+    public R getAllCategory() {
         List<ProductCategory> productCategory = productCategoryService.list(null);
         if (productCategory.size() <= 0) {
             return R.error();
@@ -101,7 +101,7 @@ public class ProductInfoController {
 
     @ApiOperation("获取所有品牌信息")
     @GetMapping("/data/brand")
-    R getAllBrands() {
+    public R getAllBrands() {
         List<BrandInfo> brandInfos = brandInfoService.list(null);
         if (brandInfos.size() <= 0) {
             return R.error();

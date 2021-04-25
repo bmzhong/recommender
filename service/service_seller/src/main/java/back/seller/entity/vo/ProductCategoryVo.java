@@ -1,4 +1,4 @@
-package back.seller.entity.Vo;
+package back.seller.entity.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

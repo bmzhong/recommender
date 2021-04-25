@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class SellerLoginController {
 
     @Autowired
-    SellerLoginService sellerService;
+    private SellerLoginService sellerService;
 
     /**
      * @param id 卖家id
