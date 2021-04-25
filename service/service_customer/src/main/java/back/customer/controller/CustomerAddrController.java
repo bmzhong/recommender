@@ -56,7 +56,7 @@ public class CustomerAddrController {
 
     //删除地址
     @ApiOperation(value = "删除地址")
-    @GetMapping("removeAddr/{id}")
+    @DeleteMapping("removeAddr/{id}")
     public R removeAddr(@ApiParam(name = "id", value = "地址id", required = true)
                         @PathVariable Integer id) {
         boolean remove = addrService.removeById(id);
