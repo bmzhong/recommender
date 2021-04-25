@@ -5,6 +5,7 @@ import back.common_utils.R;
 import back.seller.entity.*;
 import back.seller.entity.vo.BrandInfoVo;
 import back.seller.entity.vo.ProductCategoryVo;
+import back.seller.entity.vo.ProductInfoVo;
 import back.seller.service.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
@@ -44,41 +45,27 @@ public class ProductInfoController {
     @Autowired
     private ProductCategoryService productCategoryService;
 
+    /**
+     * @param id
+     * @return R
+     * @author 钟保明
+     */
     @ApiOperation("根据id查询商品信息")
     @GetMapping("/data/product/{id}")
     public R getProductInfoById(@ApiParam(name = "id", value = "商品的id", required = true)
-                         @PathVariable Integer id) {
-        ProductInfo product = productInfoService.getById(id);
-        if (null == product) {
+                                @PathVariable Integer id) {
+        ProductInfoVo productInfoVo = productInfoService.getProductInfoById(id);
+        if (null == productInfoVo) {
             return R.error();
         } else {
-            QueryWrapper<ProductPicInfo> picInfoQueryWrapper = new QueryWrapper<>();
-            picInfoQueryWrapper.eq("product_id", product.getProductId());
-            List<ProductPicInfo> picInfoList = productPicInfoService.list(picInfoQueryWrapper);
-            List<String> urls = new ArrayList<>();
-            for (ProductPicInfo productPicInfo : picInfoList) {
-                urls.add(productPicInfo.getPicUrl());
-            }
-            BrandInfo brandInfo = brandInfoService.getById(product.getBrandId());
-            SellerLogin sellerLogin = sellerLoginService.getById(product.getSellerId());
-            ProductCategory category = productCategoryService.getById(product.getCategoryId());
-            return R.ok().data("name", product.getProductName())
-                    .data("pictures", urls)
-                    .data("brandName", brandInfo.getBrandName())
-                    .data("brandLogo", brandInfo.getBrandLogo())
-                    .data("brandDesc", brandInfo.getBrandDesc())
-                    .data("brandTelephone", brandInfo.getTelephone())
-                    .data("categoryName", category.getCategoryName())
-                    .data("sellerId", sellerLogin.getSellerId())
-                    .data("price", product.getPrice())
-                    .data("productionDate", product.getProductionDate())
-                    .data("description", product.getDescript())
-                    .data("shelfLife", product.getShelfLife())
-                    ;
+            return R.ok().data("productInfo", productInfoVo);
         }
     }
 
-
+    /**
+     * @return R
+     * @author 钟保明
+     */
     @ApiOperation("查询所有分类")
     @GetMapping("/data/category")
     public R getAllCategory() {
@@ -99,6 +86,10 @@ public class ProductInfoController {
         }
     }
 
+    /**
+     * @return R
+     * @author 钟保明
+     */
     @ApiOperation("获取所有品牌信息")
     @GetMapping("/data/brand")
     public R getAllBrands() {
@@ -156,7 +147,6 @@ public class ProductInfoController {
     }
 
     /**
-     *
      * @param id 被查询的商家的id
      * @return 返回所有的商品信息
      * @author :张琦
