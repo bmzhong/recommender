@@ -8,6 +8,8 @@ import back.customer.mapper.OrderMasterMapper;
 import back.customer.service.OrderDetailService;
 import back.customer.service.OrderMasterService;
 import back.customer.service.ProductInfoService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,5 +64,24 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
             return false;
 
         return true;
+    }
+
+    @Override
+    public int cancelOrder(Integer orderId) {
+        OrderMaster orderMaster = getById(orderId);
+        int status = orderMaster.getOrderStatus();
+
+        if (status==2 || status == 3) //3不可能出现，前端解决
+            return status;
+
+        //删除所有order_id=orderId的order_detail
+        QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_id",orderMaster.getOrderId());
+        orderDetailService.remove(queryWrapper);
+
+        //删除orderMaster
+        removeById(orderMaster.getOrderId());
+
+        return status;
     }
 }

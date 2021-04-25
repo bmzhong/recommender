@@ -15,4 +15,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface OrderMasterService extends IService<OrderMaster> {
     //添加订单
     boolean addOrder(Order order);
+
+    /**
+     * 取消订单：
+     *      1. 若order_status = 0，即订单未确认，允许取消
+     *      2. 若order_status = 1，即订单已确认但未发货，允许取消
+     *      3. 若order_status = 2, 即订单已发货，拒绝取消
+     * @param orderId 订单ID
+     * @return order_status
+     */
+    int cancelOrder(Integer orderId);
 }

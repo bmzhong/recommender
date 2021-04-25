@@ -67,5 +67,28 @@ public class OrderMasterController {
             return R.error();
     }
 
+    @ApiOperation(value = "取消订单，仅当order_status=0/1时生效，即[订单未确定]和[订单未发货]")
+    @PostMapping("cancelOrder/{orderId}")
+    public R cancelOrder(@ApiParam(name = "orderId", value = "订单id", required = true)
+                         @PathVariable Integer orderId) {
+        int status = orderMasterService.cancelOrder(orderId);
+        if (status==0 || status==1) { //订单未确认、订单未发货
+            return R.ok().data("msg","cancel successfully");
+        } else if (status == 2) { //订单已发货，请与商家联系
+            return R.error().data("msg", "error: 订单已发货，请与商家联系");
+        } else
+            return R.error();
+    }
+
+    @ApiOperation(value = "查询订单状态")
+    @PostMapping("queryOrderStatus/{orderId}")
+    public R queryOrderStatus(@ApiParam(name = "orderId", value = "订单id", required = true)
+                         @PathVariable Integer orderId) {
+        OrderMaster orderMaster = orderMasterService.getById(orderId);
+        if (orderMaster == null)
+            return R.error().data("msg","no data found");
+
+        return R.ok().data("orderStatus",orderMaster.getOrderStatus());
+    }
 }
 
