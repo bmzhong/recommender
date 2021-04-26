@@ -124,7 +124,7 @@ public class ProductInfoController {
         productInfo.setProductId(0);
         final boolean save = productInfoService.save(productInfo);
         if (save) {
-            return R.ok();
+            return R.ok().data("productId",productInfo.getProductId());
         } else {
             return R.error();
         }
