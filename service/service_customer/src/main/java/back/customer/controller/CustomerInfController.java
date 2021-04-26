@@ -4,6 +4,7 @@ package back.customer.controller;
 import back.common_utils.R;
 import back.customer.entity.CustomerInf;
 import back.customer.service.CustomerInfService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,9 @@ public class CustomerInfController {
     @GetMapping("/data/customer/{id}")
     public R findCustomer(@ApiParam(name = "id", value = "客户id", required = true)
                           @PathVariable Integer id) {
-        CustomerInf customerInf = customerInfService.getById(id);
+        QueryWrapper<CustomerInf> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("customer_id", id);
+        CustomerInf customerInf = customerInfService.getOne(queryWrapper);
         if (customerInf == null)
             return R.error().data("msg", "no data found");
         else
@@ -56,7 +59,7 @@ public class CustomerInfController {
     public R editCustomer(@RequestBody CustomerInf customerInf) {
         boolean result = customerInfService.updateById(customerInf);
         if (result) {
-            return R.ok().data("id", customerInf.getCustomerId());
+            return R.ok();
         }
         return R.error();
     }
