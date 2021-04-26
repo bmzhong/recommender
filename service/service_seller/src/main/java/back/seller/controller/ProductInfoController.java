@@ -121,7 +121,6 @@ public class ProductInfoController {
     @PostMapping("/add/product")
     public R addProduct(@ApiParam(value = "商品信息", required = true)
                         @RequestBody ProductInfo productInfo) {
-        productInfo.setProductId(0);
         final boolean save = productInfoService.save(productInfo);
         if (save) {
             return R.ok().data("productId",productInfo.getProductId());
