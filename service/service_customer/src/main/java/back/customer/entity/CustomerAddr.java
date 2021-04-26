@@ -38,13 +38,13 @@ public class CustomerAddr implements Serializable {
     private Integer zip;
 
     @ApiModelProperty(value = "省")
-    private Integer province;
+    private String province;
 
     @ApiModelProperty(value = "市")
-    private Integer city;
+    private String city;
 
     @ApiModelProperty(value = "区")
-    private Integer district;
+    private String district;
 
     @ApiModelProperty(value = "详细地址")
     private String address;
