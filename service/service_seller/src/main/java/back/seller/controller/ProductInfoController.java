@@ -28,6 +28,7 @@ import java.util.List;
 @RestController
 @Api("Product Info Controller")
 @CrossOrigin
+@RequestMapping("/seller/product-info")
 public class ProductInfoController {
 
     @Autowired
