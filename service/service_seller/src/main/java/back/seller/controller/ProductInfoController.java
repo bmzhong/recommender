@@ -163,5 +163,19 @@ public class ProductInfoController {
         else
             return R.ok().data("list", list);
     }
+
+    /**
+     * @author 彭陆亚宁
+     */
+    @ApiOperation(value = "删除商品相关信息")
+    @PostMapping("removeProductById/{productId}")
+    public R removeProductById(@ApiParam(name = "productId", value = "商品id", required = true)
+                               @PathVariable Integer productId) {
+        boolean removeProductById = productInfoService.removeProductById(productId);
+        if (removeProductById)
+            return R.ok();
+        else
+            return R.error();
+    }
 }
 

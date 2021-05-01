@@ -40,6 +40,10 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
     @Autowired
     private ProductCategoryService productCategoryService;
 
+    @Autowired
+    private ProductCommentService productCommentService;
+
+    @Override
     public ProductInfoVo getProductInfoById(Integer id) {
         ProductInfo product = productInfoService.getById(id);
         if (null == product) {
@@ -70,5 +74,32 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
             productInfoVo.setSellerId(product.getShelfLife());
             return productInfoVo;
         }
+    }
+
+    /**
+     * @author 彭陆亚宁
+     */
+    @Override
+    public boolean removeProductById(Integer productId) {
+        //删除商品评论表
+        boolean removeComment = productCommentService.remove(
+                new QueryWrapper<ProductComment>().eq("product_id", productId)
+        );
+        if (!removeComment)
+            return false;
+
+        //删除商品图片信息表
+        boolean removePic = productPicInfoService.remove(
+                new QueryWrapper<ProductPicInfo>().eq("product_id",productId)
+        );
+        if (!removePic)
+            return false;
+
+        //删除商品信息表
+        boolean removeProduct = removeById(productId);
+        if (removeProduct)
+            return true;
+
+        return false;
     }
 }

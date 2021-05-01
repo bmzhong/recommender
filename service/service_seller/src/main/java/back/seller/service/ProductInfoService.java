@@ -19,4 +19,5 @@ public interface ProductInfoService extends IService<ProductInfo> {
 
     ProductInfoVo getProductInfoById(Integer id);
 
+    boolean removeProductById(Integer productId);
 }
