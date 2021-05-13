@@ -32,14 +32,14 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     private ProductInfoService productInfoService;
 
     @Override
-    public boolean addOrder(Order order) {
+    public String addOrder(Order order) {
         OrderDetail orderDetail = new OrderDetail();
         OrderMaster orderMaster = new OrderMaster();
 
         //获取商品详情
         ProductInfo product = productInfoService.getById(order.getProductId());
         if (product == null)
-            return false;
+            return null;
 
         //完善orderMaster信息
         orderMaster.setCustomerId(order.getCustomerId());
@@ -50,7 +50,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         //orderMaster入库
         boolean save = save(orderMaster);
         if (!save)
-            return false;
+            return null;
 
         //完善orderDetail信息
         orderDetail.setOrderId(orderMaster.getOrderId());
@@ -61,9 +61,9 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         //orderDetail入库
         boolean save1 = orderDetailService.save(orderDetail);
         if (!save1)
-            return false;
+            return null;
 
-        return true;
+        return orderMaster.getOrderSn();
     }
 
     @Override

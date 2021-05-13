@@ -14,7 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrderMasterService extends IService<OrderMaster> {
     //添加订单
-    boolean addOrder(Order order);
+    String addOrder(Order order);
 
     /**
      * 取消订单：

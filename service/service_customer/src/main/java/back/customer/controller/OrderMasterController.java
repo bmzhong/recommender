@@ -60,9 +60,9 @@ public class OrderMasterController {
     @PostMapping("addOrder")
     public R addOrder(@ApiParam(value = "订单信息", required = true)
                       @RequestBody Order order) {
-        boolean add = orderMasterService.addOrder(order);
-        if (add)
-            return R.ok();
+        String orderSn = orderMasterService.addOrder(order);
+        if (orderSn!=null)
+            return R.ok().data("orderSn",orderSn);
         else
             return R.error();
     }
