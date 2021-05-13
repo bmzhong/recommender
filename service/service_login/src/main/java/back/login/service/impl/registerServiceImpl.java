@@ -10,9 +10,12 @@ import back.login.service.CustomerLoginService;
 import back.login.service.SellerLoginService;
 import back.login.service.registerService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,6 +65,14 @@ public class registerServiceImpl implements registerService {
         //存储登录id以及电话号码
         customerInf.setMobilePhone(registerVo.getMobilePhone());
         customerInf.setCustomerId(customerLogin.getCustomerId());
+        String time="2000-01-01 00:00:00";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date Default = format.parse(time);
+            customerInf.setBirthday(Default);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         infService.save(customerInf);
 
         return id;
@@ -85,6 +96,7 @@ public class registerServiceImpl implements registerService {
         sellerLogin.setSellerTrueName(registerSellerVo.getTrueName());
         sellerLogin.setSellerEmail(registerSellerVo.getEmail());
         sellerLogin.setMobilePhone(registerSellerVo.getMobilePhone());
+
         sellerLoginService.save(sellerLogin);
 
         //获得账号id
