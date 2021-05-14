@@ -4,6 +4,7 @@ import back.customer.entity.OrderDetail;
 import back.customer.entity.OrderMaster;
 import back.customer.entity.ProductInfo;
 import back.customer.entity.vo.Order;
+import back.customer.entity.vo.OrderQuery;
 import back.customer.mapper.OrderMasterMapper;
 import back.customer.service.OrderDetailService;
 import back.customer.service.OrderMasterService;
@@ -13,6 +14,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -83,5 +87,31 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         removeById(orderMaster.getOrderId());
 
         return status;
+    }
+
+    @Override
+    public List<OrderQuery> queryAllOrders(Integer customerId) {
+        List<OrderMaster> orderMasters = list(new QueryWrapper<OrderMaster>().eq("customer_id", customerId));
+
+        if (orderMasters==null)
+            return null;
+
+        List<OrderQuery> res = new ArrayList<>();
+        for (OrderMaster orderMaster: orderMasters) {
+            OrderQuery orderQuery = new OrderQuery();
+            orderQuery.setOrderId(orderMaster.getOrderId());
+            orderQuery.setCustomerAddrId(orderMaster.getCustomerAddrId());
+            orderQuery.setCreateTime(orderMaster.getCreateTime());
+            orderQuery.setOrderStatus(orderMaster.getOrderStatus());
+            orderQuery.setProductName(
+                    orderDetailService.getOne(
+                            new QueryWrapper<OrderDetail>()
+                                    .eq("order_id",orderMaster.getOrderId()))
+                                        .getProductName()
+            );
+            res.add(orderQuery);
+        }
+
+        return res;
     }
 }

@@ -2,7 +2,10 @@ package back.customer.service;
 
 import back.customer.entity.OrderMaster;
 import back.customer.entity.vo.Order;
+import back.customer.entity.vo.OrderQuery;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,4 +28,7 @@ public interface OrderMasterService extends IService<OrderMaster> {
      * @return order_status
      */
     int cancelOrder(Integer orderId);
+
+    //查询相应用户所有订单信息
+    List<OrderQuery> queryAllOrders(Integer customerId);
 }

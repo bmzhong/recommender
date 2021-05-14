@@ -4,6 +4,7 @@ package back.customer.controller;
 import back.common_utils.R;
 import back.customer.entity.OrderMaster;
 import back.customer.entity.vo.Order;
+import back.customer.entity.vo.OrderQuery;
 import back.customer.service.OrderMasterService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
@@ -34,9 +35,8 @@ public class OrderMasterController {
     @PostMapping("findAllOrderMaster/{id}")
     public R findAllOrderMaster(@ApiParam(name = "id", value = "用户id", required = true)
                          @PathVariable Integer id) {
-        QueryWrapper<OrderMaster> wrapper = new QueryWrapper<>();
-        wrapper.eq("customer_id", id);
-        List<OrderMaster> list = orderMasterService.list(wrapper);
+
+        List<OrderQuery> list = orderMasterService.queryAllOrders(id);
         if (list.isEmpty())
             return R.error().data("msg", "no data found");
         else
