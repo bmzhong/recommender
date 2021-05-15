@@ -72,8 +72,8 @@ public class ProductInfoController {
      * @author 王智
      */
     @ApiOperation(value = "通过商品名称模糊查找相应商品")
-    @GetMapping("SearchByPartName/{productName}")
-    public R SearchByPartName(@ApiParam(name = "productName", value = "商品关键字")
+    @GetMapping("searchByPartName/{productName}")
+    public R searchByPartName(@ApiParam(name = "productName", value = "商品关键字")
                               @PathVariable String productName) {
         QueryWrapper<ProductInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("product_name", productName);
@@ -91,8 +91,8 @@ public class ProductInfoController {
      * @author 王智
      */
     @ApiOperation(value = "通过商品名称模糊查找相应商品")
-    @GetMapping("SearchByTypeByPartName/{typeId}/{productName}")
-    public R SearchByTypeByPartName(@ApiParam(name = "typeId", value = "分类Id", required = true)
+    @GetMapping("searchByTypeByPartName/{typeId}/{productName}")
+    public R searchByTypeByPartName(@ApiParam(name = "typeId", value = "分类Id", required = true)
                                     @PathVariable String typeId,
                                     @ApiParam(name = "productName", value = "商品关键字")
                                     @PathVariable String productName) {
@@ -243,10 +243,10 @@ public class ProductInfoController {
      * @return 返回所有商品信息
      */
     @ApiOperation(value = "返回所有商品信息")
-    @RequestMapping("/index")
-    public R getAllProductInfo () {
+    @PostMapping("/getAllProductInfos")
+    public R getAllProductInfos () {
         final List<ProductInfo> productInfos = productInfoService.list(new QueryWrapper<>());
-        return R.ok().data("allProductInfo", productInfos);
+        return R.ok().data("allProductInfos", productInfos);
     }
 }
 
