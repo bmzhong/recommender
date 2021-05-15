@@ -7,7 +7,9 @@ import back.seller.entity.vo.BrandInfoVo;
 import back.seller.entity.vo.ProductCategoryVo;
 import back.seller.entity.vo.ProductInfoVo;
 import back.seller.service.*;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -176,6 +178,17 @@ public class ProductInfoController {
             return R.ok();
         else
             return R.error();
+    }
+
+    /**
+     * @author 张琦
+     * @return 返回所有商品信息
+     */
+    @ApiOperation(value = "返回所有商品信息")
+    @RequestMapping("/index")
+    public R getAllProductInfo () {
+        final List<ProductInfo> productInfos = productInfoService.list(new QueryWrapper<>());
+        return R.ok().data("allProductInfo", productInfos);
     }
 }
 
