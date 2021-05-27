@@ -4,6 +4,7 @@ package back.login.controller;
 import back.common_utils.R;
 import back.login.entity.CustomerLogin;
 import back.login.entity.SellerLogin;
+import back.login.entity.Vo.PasswordVo;
 import back.login.service.CustomerLoginService;
 import back.login.service.SellerLoginService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -110,6 +111,58 @@ public class CustomerLoginController {
         }else {
             return R.error().data("id",0);
         }
+    }
+
+    /*
+    author: plyn
+    update customer's password
+     */
+    @PostMapping("updatePwd")
+    @ApiOperation(value = "买家修改密码")
+    public R updatePwd(@ApiParam(name = "oldPwd", value = "旧密码", required = true)
+                   @RequestBody PasswordVo passwordVo) {
+        //检查旧密码是否正确
+        CustomerLogin customerLogin = customerLoginService.getOne(
+                new QueryWrapper<CustomerLogin>()
+                        .eq("customer_id", passwordVo.getUserId())
+        );
+        if (!customerLogin.getPassword().equals(passwordVo.getOldPwd()))
+            return R.error().data("msg","please enter the correct password");
+
+        //更新密码
+        customerLogin.setPassword(passwordVo.getNewPwd());
+        customerLoginService.update(customerLogin,
+                new QueryWrapper<CustomerLogin>()
+                        .eq("customer_id", passwordVo.getUserId())
+        );
+        return R.ok().data("msg","update successfully");
+
+    }
+
+    /*
+   author: plyn
+   update seller's password
+    */
+    @PostMapping("updatePwdSeller")
+    @ApiOperation(value = "卖家家修改密码")
+    public R updatePwdSeller(@ApiParam(name = "oldPwd", value = "旧密码", required = true)
+                   @RequestBody PasswordVo passwordVo) {
+        //检查旧密码是否正确
+        SellerLogin sellerLogin = sellerLoginService.getOne(
+                new QueryWrapper<SellerLogin>()
+                        .eq("seller_id", passwordVo.getUserId())
+        );
+        if (!sellerLogin.getPassword().equals(passwordVo.getOldPwd()))
+            return R.error().data("msg","please enter the correct password");
+
+        //更新密码
+        sellerLogin.setPassword(passwordVo.getNewPwd());
+        sellerLoginService.update(sellerLogin,
+                new QueryWrapper<SellerLogin>()
+                        .eq("seller_id", passwordVo.getUserId())
+        );
+        return R.ok().data("msg","update successfully");
+
     }
 }
 
