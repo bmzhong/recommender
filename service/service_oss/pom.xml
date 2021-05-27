@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service_customer</artifactId>
+    <artifactId>service_oss</artifactId>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -17,16 +17,16 @@
     </properties>
 
     <dependencies>
+        <!-- 阿里云oss依赖 -->
         <dependency>
-            <groupId>com.github.wxpay</groupId>
-            <artifactId>wxpay-sdk</artifactId>
-            <version>0.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
 
+        <!-- 日期工具栏依赖 -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
     </dependencies>
-
 </project>

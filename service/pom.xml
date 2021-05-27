@@ -15,6 +15,7 @@
         <module>service_customer</module>
         <module>service_login</module>
         <module>service_seller</module>
+        <module>service_oss</module>
     </modules>
     <dependencies>
 
@@ -165,8 +166,8 @@
     </build>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
 
