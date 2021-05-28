@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.security.krb5.Asn1Exception;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +37,14 @@ public class ProductInfoController {
     @Autowired
     private ProductInfoService productInfoService;
 
-
     @Autowired
     private BrandInfoService brandInfoService;
-
 
     @Autowired
     private ProductCategoryService productCategoryService;
 
-
+    @Autowired
+    private ProductPicInfoService productPicInfoService;
 
     /**
      * @param categoryId
@@ -218,10 +218,20 @@ public class ProductInfoController {
         QueryWrapper<ProductInfo> wrapper = new QueryWrapper<>();
         wrapper.eq("seller_id", id);
         List<ProductInfo> list = productInfoService.list(wrapper);
-        if (list.isEmpty())
+        List<ProductInfoVo> ans = new ArrayList<>();
+        for(ProductInfo p : list){
+            Integer i = p.getProductId();
+            ProductInfoVo productInfoVo = productInfoService.getProductInfoById(id);
+            if (null == productInfoVo) {
+                return R.error();
+            } else {
+                ans.add(productInfoVo);
+            }
+        }
+        if (ans.isEmpty())
             return R.error().data("msg", "no data found");
         else
-            return R.ok().data("list", list);
+            return R.ok().data("list", ans);
     }
 
     /**
