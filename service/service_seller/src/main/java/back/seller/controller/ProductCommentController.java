@@ -1,7 +1,9 @@
 package back.seller.controller;
 
 
-import com.baomidou.mybatisplus.extension.api.R;
+import back.common_utils.R;
+import back.seller.entity.ProductComment;
+import back.seller.service.ProductCommentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class ProductCommentController {
      */
     @ApiOperation("增加商品评论")
     @RequestMapping("/add/comment")
-    public void addComment (@ApiParam(value = "商品评论信息", required = true)
+    public R addComment (@ApiParam(value = "商品评论信息", required = true)
                                 @RequestBody ProductComment productComment) {
         final boolean save = productCommentService.save(productComment);
         if (save) {
