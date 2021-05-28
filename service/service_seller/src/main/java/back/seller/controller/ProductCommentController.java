@@ -3,14 +3,14 @@ package back.seller.controller;
 
 import back.common_utils.R;
 import back.seller.entity.ProductComment;
+import back.seller.entity.vo.ProductCommentVo;
 import back.seller.service.ProductCommentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -33,7 +33,7 @@ public class ProductCommentController {
      * @author :张琦
      */
     @ApiOperation("增加商品评论")
-    @RequestMapping("/add/comment")
+    @GetMapping("/add/comment")
     public R addComment (@ApiParam(value = "商品评论信息", required = true)
                                 @RequestBody ProductComment productComment) {
         final boolean save = productCommentService.save(productComment);
@@ -44,5 +44,21 @@ public class ProductCommentController {
         }
     }
 
+    /**
+     * @param productId
+     * @return 一个商品的所有评论
+     * @author 钟保明
+     */
+    @ApiOperation("根据productId获取商品的所有评论")
+    @GetMapping("/getCommentsByProductId/{productId}")
+    public R getCommentsByProductId(@ApiParam(value = "商品id", required = true)
+                                    @PathVariable Integer productId) {
+        List<ProductCommentVo> commentVoList = productCommentService.getCommentsByProductId(productId);
+        if (null == commentVoList) {
+            return R.error();
+        } else {
+            return R.ok().data("commentVoList", commentVoList);
+        }
+    }
 }
 

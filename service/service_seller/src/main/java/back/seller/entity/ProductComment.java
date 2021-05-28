@@ -45,5 +45,6 @@ public class ProductComment implements Serializable {
     @ApiModelProperty(value = "评论时间")
     private Date auditTime;
 
-
+    @ApiModelProperty(value = "给这个商品几颗星，5星最好，0星最差")
+    private Integer star;
 }
