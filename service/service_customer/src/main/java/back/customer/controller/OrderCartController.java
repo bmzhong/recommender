@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * <p>
@@ -80,11 +82,13 @@ public class OrderCartController {
                       @PathVariable Integer id){
         QueryWrapper<OrderCart> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("customer_id", id);
-        OrderCart orderCart = orderCartService.getOne(queryWrapper);
-        if ( orderCart == null)
+
+        List<OrderCart> orderCartList = orderCartService.list(queryWrapper);
+
+        if ( orderCartList == null)
             return R.error().data("msg", "no data found");
         else
-            return R.ok().data("orderCart", orderCart);
+            return R.ok().data("orderCartList", orderCartList);
     }
 }
 
