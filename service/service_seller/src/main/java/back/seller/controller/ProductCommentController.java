@@ -34,7 +34,7 @@ public class ProductCommentController {
      * @author :张琦
      */
     @ApiOperation("增加商品评论")
-    @GetMapping("/add/comment")
+    @PostMapping("/add/comment/{content}/{customerId}/{orderId}/{productId}/{star}")
     public R addComment (@ApiParam(value = "商品评论内容", required = true)
                             @RequestParam("content") String content,
                          @ApiParam(value = "用户Id", required = true)
