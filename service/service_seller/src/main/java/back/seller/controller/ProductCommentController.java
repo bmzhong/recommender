@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,8 +35,23 @@ public class ProductCommentController {
      */
     @ApiOperation("增加商品评论")
     @GetMapping("/add/comment")
-    public R addComment (@ApiParam(value = "商品评论信息", required = true)
-                                @RequestBody ProductComment productComment) {
+    public R addComment (@ApiParam(value = "商品评论内容", required = true)
+                            @RequestParam("content") String content,
+                         @ApiParam(value = "用户Id", required = true)
+                            @RequestParam("customerId") Integer customerId,
+                         @ApiParam(value = "订单Id", required = true)
+                            @RequestParam("orderId") Integer orderId,
+                         @ApiParam(value = "商品Id", required = true)
+                            @RequestParam("productId") Integer productId,
+                         @ApiParam(value = "评论的星级数", required = true)
+                            @RequestParam("star") Integer star) {
+        ProductComment productComment = new ProductComment()
+                .setProductId(productId)
+                .setOrderId(orderId)
+                .setCustomerId(customerId)
+                .setContent(content)
+                .setAuditTime(new Date())
+                .setStar(star);
         final boolean save = productCommentService.save(productComment);
         if (save) {
             return R.ok().data("commentId",productComment.getCommentId());
