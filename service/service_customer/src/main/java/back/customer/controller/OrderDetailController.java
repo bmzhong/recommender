@@ -3,6 +3,7 @@ package back.customer.controller;
 
 import back.common_utils.R;
 import back.customer.entity.OrderDetail;
+import back.customer.entity.vo.OrderDetailQuery;
 import back.customer.service.OrderDetailService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
@@ -33,13 +34,11 @@ public class OrderDetailController {
     @PostMapping("findOrderDetailById/{orderId}")
     public R findOrderDetailById(@ApiParam(name = "orderId", value = "订单ID", required = true)
                                  @PathVariable Integer orderId) {
-        QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("order_id", orderId);
-        OrderDetail orderDetail = orderDetailService.getOne(queryWrapper);
-        if (orderDetail == null)
+        OrderDetailQuery query = orderDetailService.getAllInfo(orderId);
+        if (query == null)
             return R.error().data("msg", "no data found");
         else
-            return R.ok().data("orderDetail", orderDetail);
+            return R.ok().data("orderDetail", query);
     }
 
     //通过商品名称模糊查询订单
