@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-04-22
  */
 public interface OrderCartService extends IService<OrderCart> {
-
+    Integer addOne(OrderCart entity);
 }

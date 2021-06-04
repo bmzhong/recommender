@@ -42,9 +42,9 @@ public class OrderCartController {
     @PostMapping("addCart")
     public R addCart(@ApiParam(value = "商品信息",required = true )
                      @RequestBody OrderCart ordercart){
-        boolean save = orderCartService.save(ordercart);
-        if (save)
-            return R.ok().data("cartID",ordercart.getCartId());
+        Integer cart_id = orderCartService.addOne(ordercart);
+        if (cart_id != null)
+            return R.ok().data("cartID",cart_id);
         else
             return R.error();
     }
@@ -58,10 +58,10 @@ public class OrderCartController {
      */
     //删除购物车的商品
     @ApiOperation(value = "删除购物车商品")
-    @DeleteMapping("/removeCart/{productId}")
-    public R removeCart(@ApiParam(name = "productId", value = "商品id", required = true )
-                        @PathVariable Integer productId){
-        boolean remove = orderCartService.removeById(productId);
+    @DeleteMapping("/removeCart/{cartId}")
+    public R removeCart(@ApiParam(name = "cartId", value = "购物车id", required = true )
+                        @PathVariable Integer cartId){
+        boolean remove = orderCartService.remove(new QueryWrapper<OrderCart>().eq("cart_id", cartId));
         if (remove)
             return R.ok();
         else
