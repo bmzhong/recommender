@@ -1,6 +1,9 @@
 package back.customer.entity;
 
+import back.customer.entity.vo.CustomerInfoVo;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -63,9 +66,26 @@ public class CustomerInf implements Serializable {
     private BigDecimal userMoney;
 
     @ApiModelProperty(value = "修改时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date modifiedTime;
 
     private String customerInfcol;
 
+    public CustomerInf() {
+        super();
+    }
 
+    public CustomerInf(CustomerInfoVo vo) {
+        this.customerId = vo.getCustomerId();
+        this.customerTrueName = vo.getCustomerTrueName();
+        this.identityCardType = vo.getIdentityCardType();
+        this.identityCardNo = vo.getIdentityCardNo();
+        this.mobilePhone = vo.getMobilePhone();
+        this.customerEmail = vo.getCustomerEmail();
+        this.gender = vo.getGender();
+        this.registerTime = new Date();
+        this.birthday = new Date(vo.getBirthday());
+        this.userMoney = new BigDecimal(0);
+        this.customerInfcol = "customerInfcol";
+    }
 }

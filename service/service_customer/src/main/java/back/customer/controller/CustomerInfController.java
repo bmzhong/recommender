@@ -3,6 +3,7 @@ package back.customer.controller;
 
 import back.common_utils.R;
 import back.customer.entity.CustomerInf;
+import back.customer.entity.vo.CustomerInfoVo;
 import back.customer.service.CustomerInfService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
@@ -41,7 +42,7 @@ public class CustomerInfController {
         queryWrapper.eq("customer_id", id);
         CustomerInf customerInf = customerInfService.getOne(queryWrapper);
         if (customerInf == null)
-            return R.error().data("msg", "no data found");
+            return R.ok().data("msg", "no data found");
         else
             return R.ok().data("customerInf", customerInf);
     }
@@ -56,7 +57,7 @@ public class CustomerInfController {
     //编辑客户信息
     @ApiOperation(value = "编辑客户信息")
     @PostMapping("/edit/customer/others")
-    public R editCustomer(@RequestBody CustomerInf customerInf) {
+    public R editCustomer(@RequestBody CustomerInfoVo customerInf) {
         boolean result = customerInfService.updateById(customerInf);
         if (result) {
             return R.ok();

@@ -62,6 +62,10 @@ public class OrderDetailQuery {
     @ApiModelProperty(value = "商品名称")
     private String productName;
 
+    public OrderDetailQuery() {
+        super();
+    }
+
     public OrderDetailQuery(OrderMaster master, OrderDetail detail) {
         this.orderId = master.getOrderId();
         this.orderSn = master.getOrderSn();

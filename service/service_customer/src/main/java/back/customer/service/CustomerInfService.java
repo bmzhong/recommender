@@ -1,6 +1,7 @@
 package back.customer.service;
 
 import back.customer.entity.CustomerInf;
+import back.customer.entity.vo.CustomerInfoVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-04-08
  */
 public interface CustomerInfService extends IService<CustomerInf> {
-
+    boolean updateById(CustomerInfoVo entity);
 }
