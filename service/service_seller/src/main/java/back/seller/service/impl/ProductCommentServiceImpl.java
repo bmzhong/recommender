@@ -46,6 +46,7 @@ public class ProductCommentServiceImpl extends ServiceImpl<ProductCommentMapper,
                 commentVo.setUsername(customerLogin.getLoginName());
                 commentVo.setStar(comment.getStar());
                 commentVo.setContent(comment.getContent());
+                commentVo.setAuditTime(comment.getAuditTime());
                 commentVos.add(commentVo);
             }
             return commentVos;
