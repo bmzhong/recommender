@@ -221,7 +221,7 @@ public class ProductInfoController {
         List<ProductInfoVo> ans = new ArrayList<>();
         for(ProductInfo p : list){
             Integer i = p.getProductId();
-            ProductInfoVo productInfoVo = productInfoService.getProductInfoById(id);
+            ProductInfoVo productInfoVo = productInfoService.getProductInfoById(i);
             if (null == productInfoVo) {
                 return R.error();
             } else {

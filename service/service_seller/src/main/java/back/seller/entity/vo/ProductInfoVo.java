@@ -33,4 +33,6 @@ public class ProductInfoVo {
 
     private Integer shelfLife;
 
+    private Integer productId;
+
 }
