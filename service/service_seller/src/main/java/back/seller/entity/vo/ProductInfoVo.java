@@ -21,6 +21,8 @@ public class ProductInfoVo {
 
     private String brandTelephone;
 
+    private Integer categoryId;
+
     private String categoryName;
 
     private Integer sellerId;

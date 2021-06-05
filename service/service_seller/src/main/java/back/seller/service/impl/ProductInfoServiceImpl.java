@@ -73,6 +73,7 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
             productInfoVo.setDescription(product.getDescript());
             productInfoVo.setShelfLife(product.getShelfLife());
             productInfoVo.setProductId(product.getProductId());
+            productInfoVo.setCategoryId(category.getCategoryId());
             return productInfoVo;
         }
     }
