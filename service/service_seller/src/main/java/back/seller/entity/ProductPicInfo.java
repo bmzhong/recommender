@@ -1,7 +1,11 @@
 package back.seller.entity;
 
+import back.seller.entity.vo.ProductPicVo;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -49,7 +53,19 @@ public class ProductPicInfo implements Serializable {
     private Integer picStatus;
 
     @ApiModelProperty(value = "修改时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date modifiedTime;
 
+    public ProductPicInfo() {
+        super();
+    }
 
+    public ProductPicInfo(ProductPicVo productPicVo) {
+        this.productId = productPicVo.getProductId();
+        this.picDesc = productPicVo.getPicDesc();
+        this.picUrl = productPicVo.getPicUrl();
+        this.isMaster = productPicVo.getIsMaster();
+        this.picOrder = productPicVo.getPicOrder();
+        this.picStatus = productPicVo.getPicStatus();
+    }
 }
