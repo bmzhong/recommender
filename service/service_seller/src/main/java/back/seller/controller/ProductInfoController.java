@@ -255,8 +255,21 @@ public class ProductInfoController {
     @ApiOperation(value = "返回所有商品信息")
     @PostMapping("/getAllProductInfos")
     public R getAllProductInfos () {
-        final List<ProductInfo> productInfos = productInfoService.list(new QueryWrapper<>());
-        return R.ok().data("allProductInfos", productInfos);
+        List<ProductInfo> list = productInfoService.list(null);
+        List<ProductInfoVo> ans = new ArrayList<>();
+        for(ProductInfo p : list){
+            Integer i = p.getProductId();
+            ProductInfoVo productInfoVo = productInfoService.getProductInfoById(i);
+            if (null == productInfoVo) {
+                return R.error();
+            } else {
+                ans.add(productInfoVo);
+            }
+        }
+        if (ans.isEmpty())
+            return R.error().data("msg", "no data found");
+        else
+            return R.ok().data("list", ans);
     }
 }
 
