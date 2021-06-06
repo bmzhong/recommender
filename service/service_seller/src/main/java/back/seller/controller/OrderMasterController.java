@@ -66,7 +66,7 @@ public class OrderMasterController {
             return R.error();
         }
         orderMaster.setShippingCompName(shipping_comp_name);
-        orderMaster.setOrderStatus(1);
+        orderMaster.setOrderStatus(2);
         String shipping_sn = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         orderMaster.setShippingSn(shipping_sn);
         orderMasterService.updateById(orderMaster);
