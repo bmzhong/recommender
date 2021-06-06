@@ -57,11 +57,21 @@ public class ProductInfoController {
                                 @PathVariable Integer categoryId) {
         QueryWrapper<ProductInfo> wrapper = new QueryWrapper<>();
         wrapper.eq("category_id", categoryId);
-        List<Object> productInfos = productInfoService.listObjs(wrapper);
+        List<ProductInfo> productInfos = productInfoService.list(wrapper);
+        List<ProductInfoVo> ans = new ArrayList<>();
+        for(ProductInfo p : productInfos){
+            Integer i = p.getProductId();
+            ProductInfoVo productInfoVo = productInfoService.getProductInfoById(i);
+            if (null == productInfoVo) {
+                return R.error();
+            } else {
+                ans.add(productInfoVo);
+            }
+        }
         if (productInfos.isEmpty()) {
             return R.error();
         } else {
-            return R.ok().data("productInfos", productInfos);
+            return R.ok().data("productInfos", ans);
         }
     }
 
@@ -77,11 +87,21 @@ public class ProductInfoController {
                               @PathVariable String productName) {
         QueryWrapper<ProductInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("product_name", productName);
-        List<Object> list = productInfoService.listObjs(queryWrapper);
+        List<ProductInfo> list = productInfoService.list(queryWrapper);
+        List<ProductInfoVo> ans = new ArrayList<>();
+        for(ProductInfo p : list){
+            Integer i = p.getProductId();
+            ProductInfoVo productInfoVo = productInfoService.getProductInfoById(i);
+            if (null == productInfoVo) {
+                return R.error();
+            } else {
+                ans.add(productInfoVo);
+            }
+        }
         if (list.isEmpty())
             return R.error().data("msg", "no data found");
         else
-            return R.ok().data("list", list);
+            return R.ok().data("list", ans);
     }
 
     /**
@@ -99,11 +119,21 @@ public class ProductInfoController {
         QueryWrapper<ProductInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("category_id", typeId);
         queryWrapper.like("product_name", productName);
-        List<Object> list = productInfoService.listObjs(queryWrapper);
+        List<ProductInfo> list = productInfoService.list(queryWrapper);
+        List<ProductInfoVo> ans = new ArrayList<>();
+        for(ProductInfo p : list){
+            Integer i = p.getProductId();
+            ProductInfoVo productInfoVo = productInfoService.getProductInfoById(i);
+            if (null == productInfoVo) {
+                return R.error();
+            } else {
+                ans.add(productInfoVo);
+            }
+        }
         if (list.isEmpty())
             return R.error().data("msg", "no data found");
         else
-            return R.ok().data("list", list);
+            return R.ok().data("list", ans);
     }
 
     /**
