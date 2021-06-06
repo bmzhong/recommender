@@ -70,6 +70,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
                 }
                 CustomerAddr customerAddr = customerAddrs.get(0);
                 SellerOrderVo sellerOrderVo = new SellerOrderVo();
+                sellerOrderVo.setOrderId(orderMaster.getOrderId());
                 sellerOrderVo.setProductName(info.getProductName());
                 sellerOrderVo.setProductCnt(detail.getProductCnt());
                 sellerOrderVo.setOrderStatus(orderMaster.getOrderStatus());

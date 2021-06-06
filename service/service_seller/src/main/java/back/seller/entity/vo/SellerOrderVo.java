@@ -6,6 +6,9 @@ import lombok.Data;
 @Data
 public class SellerOrderVo {
 
+    @ApiModelProperty(value = "订单ID")
+    private Integer orderId;
+
     @ApiModelProperty(value = "商品名称")
     private String productName;
 
