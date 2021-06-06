@@ -72,6 +72,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
                 SellerOrderVo sellerOrderVo = new SellerOrderVo();
                 sellerOrderVo.setProductName(info.getProductName());
                 sellerOrderVo.setProductCnt(detail.getProductCnt());
+                sellerOrderVo.setOrderStatus(orderMaster.getOrderStatus());
                 sellerOrderVo.setProvince(customerAddr.getProvince());
                 sellerOrderVo.setCity(customerAddr.getCity());
                 sellerOrderVo.setDistrict(customerAddr.getDistrict());

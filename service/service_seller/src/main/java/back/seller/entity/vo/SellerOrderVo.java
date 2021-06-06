@@ -26,4 +26,7 @@ public class SellerOrderVo {
 
     @ApiModelProperty(value = "邮编")
     private String zip;
+
+    @ApiModelProperty(value = "订单状态")
+    private Integer orderStatus;
 }
