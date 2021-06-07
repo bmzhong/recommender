@@ -3,6 +3,8 @@ package back.seller.entity.vo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class SellerOrderVo {
 
@@ -32,4 +34,7 @@ public class SellerOrderVo {
 
     @ApiModelProperty(value = "订单状态")
     private Integer orderStatus;
+
+    @ApiModelProperty(value = "订单金额")
+    private BigDecimal orderMoney;
 }

@@ -79,7 +79,10 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
                 sellerOrderVo.setDistrict(customerAddr.getDistrict());
                 sellerOrderVo.setAddress(customerAddr.getAddress());
                 sellerOrderVo.setZip(customerAddr.getZip());
+                sellerOrderVo.setOrderMoney(orderMaster.getOrderMoney());
+
                 sellerOrderVos.add(sellerOrderVo);
+
             }
         }
         return sellerOrderVos;
